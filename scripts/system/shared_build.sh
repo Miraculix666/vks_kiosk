@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# VKS-Kiosk Shared ISO Builder Logic
+# vks_kiosk Shared ISO Builder Logic
 # ============================================================
 set -euo pipefail
 
@@ -195,7 +195,7 @@ build_iso() {
     echo "  Aktualisiere Pruefsummen ..."
     find . -follow -type f -print0 | xargs --null md5sum > md5sum.txt
 
-    OUTISO="${CURRDIR}/vks-kiosk-debian-${VERSION}.iso"
+    OUTISO="${CURRDIR}/vks_kiosk-debian-${VERSION}.iso"
     echo "  Baue ISO zusammen ..."
     xorriso -as mkisofs -o "$OUTISO" \
         -c isolinux/boot.cat \
@@ -309,7 +309,7 @@ cleanup_environment() {
         CLEANUP_OPTIONS=(
             "1" "Loesche temporaeres Arbeitsverzeichnis (workdir/)" "ON"
             "2" "Loesche das heruntergeladene Basis-Debian-ISO" "OFF"
-            "3" "Loesche das generierte VKS-Kiosk ISO" "OFF"
+            "3" "Loesche das generierte vks_kiosk ISO" "OFF"
         )
 
         if command -v whiptail >/dev/null 2>&1; then
@@ -318,7 +318,7 @@ cleanup_environment() {
             echo "Bereinigungsoptionen:"
             echo "[1] temporaeres Arbeitsverzeichnis (workdir/)"
             echo "[2] Basis-Debian-ISO"
-            echo "[3] VKS-Kiosk ISO"
+            echo "[3] vks_kiosk ISO"
             read -r -p "Auswahl (kommagetrennt, z.B. 1,2) [Leer=Keine]: " TEXT_CHOICES
             CHOICES=""
             [[ "$TEXT_CHOICES" == *"1"* ]] && CHOICES='"1" '
@@ -349,3 +349,4 @@ cleanup_environment() {
         echo ""
     fi
 }
+

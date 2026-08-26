@@ -114,7 +114,7 @@ fi
 
 echo ""
 echo "=========================================="
-echo "  VKS-Kiosk ISO Builder (Linux-Version)"
+echo "  vks_kiosk ISO Builder (Linux-Version)"
 echo "=========================================="
 echo ""
 
@@ -126,3 +126,4 @@ cleanup_environment
 
 echo ""
 echo "Erfolgreich abgeschlossen."
+

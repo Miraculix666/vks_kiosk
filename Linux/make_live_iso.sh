@@ -1,9 +1,9 @@
 #!/bin/bash
 # ============================================================
-# VKS-Kiosk Live-Build ISO Creator
+# vks_kiosk Live-Build ISO Creator
 # ============================================================
 # Dieses Skript nutzt Debian live-build (lb), um ein echtes,
-# natives Live-ISO mit injizierter VKS-Kiosk Logik zu erstellen.
+# natives Live-ISO mit injizierter vks_kiosk Logik zu erstellen.
 # Dies beantwortet den Bedarf nach einem echten "Live-System"
 # ohne Umwege ueber Netinst oder QEMU.
 # ============================================================
@@ -42,8 +42,8 @@ lb config \
     --linux-packages "linux-image" \
     --bootappend-live "boot=live components quiet splash" \
     --iso-application "VKS Kiosk Live" \
-    --iso-volume "VKS-KIOSK" \
-    --image-name "vks-kiosk-live"
+    --iso-volume "vks_kiosk" \
+    --image-name "vks_kiosk-live"
 
 # Hinzufuegen der benoetigten Pakete
 mkdir -p config/package-lists
@@ -72,7 +72,7 @@ cat << 'DESKTOP' > config/includes.chroot/home/vksuser/Desktop/install.desktop
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=VKS-Kiosk Installieren
+Name=vks_kiosk Installieren
 Comment=Installiert das System auf eine lokale Festplatte
 Exec=sudo calamares
 Icon=drive-harddisk
@@ -127,12 +127,13 @@ echo "=========================================="
 lb build
 
 if [ -f "live-image-amd64.hybrid.iso" ]; then
-    mv live-image-amd64.hybrid.iso "${CURRDIR}/vks-kiosk-true-live.iso"
+    mv live-image-amd64.hybrid.iso "${CURRDIR}/vks_kiosk-true-live.iso"
     echo "=========================================="
     echo "  Live-ISO erfolgreich erstellt!"
-    echo "  Pfad: ${CURRDIR}/vks-kiosk-true-live.iso"
+    echo "  Pfad: ${CURRDIR}/vks_kiosk-true-live.iso"
     echo "=========================================="
 else
     echo "FEHLER: ISO konnte nicht generiert werden."
     exit 1
 fi
+

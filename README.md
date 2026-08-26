@@ -1,6 +1,6 @@
-# VKS-Kiosk 📺
+# vks_kiosk 📺
 
-VKS-Kiosk ist ein sicheres, minimalistisches und stark eingeschränktes Linux-Live-System (Debian-basiert), das speziell für den Einsatz als Video Conferencing System (VKS) auf Thin Clients (z.B. Fujitsu Futro) entwickelt wurde. Es bootet als Live-Medium von einem USB-Stick und startet einen vorkonfigurierten Browser im Kiosk-Modus ohne Adressleiste und Navigation.
+vks_kiosk ist ein sicheres, minimalistisches und stark eingeschränktes Linux-Live-System (Debian-basiert), das speziell für den Einsatz als Video Conferencing System (VKS) auf Thin Clients (z.B. Fujitsu Futro) entwickelt wurde. Es bootet als Live-Medium von einem USB-Stick und startet einen vorkonfigurierten Browser im Kiosk-Modus ohne Adressleiste und Navigation.
 
 ## 🌟 Features
 
@@ -34,7 +34,7 @@ Für die Erstellung unter Windows wurde eine automatisierte Strecke mittels Wind
 
 2. **In das Windows-Verzeichnis des Repositories wechseln:**
    ```powershell
-   cd C:\GitHub\VKS-Kiosk\Windows
+   cd C:\GitHub\vks_kiosk\Windows
    ```
 
 3. **Das PowerShell-Vorbereitungsskript ausführen:**
@@ -77,7 +77,7 @@ Bei der Nutzung eines nativen Ubuntu oder Debian ist der Prozess noch einfacher.
 2. **Build-Skript starten:**
    Wechsle in den Ordner `Linux` und starte das Skript:
    ```bash
-   cd C:\GitHub\VKS-Kiosk\Linux
+   cd C:\GitHub\vks_kiosk\Linux
    sudo ./make_install.sh
    ```
 
@@ -116,3 +116,4 @@ Das Kiosk-System läuft by-default in einem Read-Only Modus (via `overlayfs` und
 - **Aktueller Ansatz (Netinst + Preseed):** Der aktuelle Ansatz manipuliert einen minimalen Debian Installer (`netinst`), der die Kiosk-Logik injiziert bekommt. Dies hat den massiven Vorteil, dass das erzeugte ISO sehr klein ist. Es ist außerdem universell:
   - Das ISO kann auf einen Stick gebrannt und klassisch genutzt werden, um Thin-Clients zu bespielen.
   - **Ventoy-Kompatibilität:** Durch die neu eingeführte `.env` Option `AUTO_WIPE_TARGET_DISK=false` kann dieses ISO nun sicher auf einen Multiboot-Stick (z.B. Ventoy) packen. Der Installer fragt nun, wohin er installieren soll, anstatt gnadenlos den Ventoy-Stick zu löschen!
+

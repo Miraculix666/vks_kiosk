@@ -1,5 +1,5 @@
 # ============================================================
-# VKS-Kiosk - Windows/WSL2 Vorbereitungsskript
+# vks_kiosk - Windows/WSL2 Vorbereitungsskript
 # Erstellt den Build-Kontext unter Windows und reicht den
 # USB-Stick via usbipd an WSL2 durch.
 # Als Administrator ausfuehren!
@@ -156,7 +156,7 @@ if (-not $attached) {
 # [4/5] Junction Link erstellen
 # ============================================================
 Write-Host "`n=== [4/5] Junction Link pruefen ===" -ForegroundColor Cyan
-$JunctionPath = Join-Path -Path $env:USERPROFILE -ChildPath "VKS-Kiosk-Windows"
+$JunctionPath = Join-Path -Path $env:USERPROFILE -ChildPath "vks_kiosk-Windows"
 if (-not (Test-Path -Path $JunctionPath)) {
     New-Item -ItemType Junction -Path $JunctionPath -Target $PSScriptRoot | Out-Null
     Write-Host "  Junction Link erstellt: $JunctionPath -> $PSScriptRoot" -ForegroundColor Green
@@ -174,3 +174,4 @@ Write-Host "  sudo ./make_install_wsl.sh" -ForegroundColor Green
 Write-Host ""
 Set-Location -Path $JunctionPath
 wsl -d Debian
+

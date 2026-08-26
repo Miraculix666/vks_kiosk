@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# VKS-Kiosk ISO Builder (WSL-Version)
+# vks_kiosk ISO Builder (WSL-Version)
 # Baut die Debian-netinst.iso mit injizierten Kiosk-Skripten
 # und schreibt sie optional auf einen USB-Stick.
 # ============================================================
@@ -29,7 +29,7 @@ USER_PW_CRYPTED=$(echo "$VKS_USER_PASSWORD" | openssl passwd -6 -stdin)
 
 echo ""
 echo "=========================================="
-echo "  VKS-Kiosk ISO Builder (WSL-Version)"
+echo "  vks_kiosk ISO Builder (WSL-Version)"
 echo "=========================================="
 echo ""
 
@@ -173,7 +173,7 @@ gzip install.amd/initrd
 echo "  Aktualisiere Pruefsummen ..."
 find . -follow -type f -print0 | xargs --null md5sum > md5sum.txt
 
-OUTISO="${CURRDIR}/vks-kiosk-debian-${VERSION}.iso"
+OUTISO="${CURRDIR}/vks_kiosk-debian-${VERSION}.iso"
 echo "  Baue ISO zusammen ..."
 xorriso -as mkisofs -o "$OUTISO" \
     -c isolinux/boot.cat \
@@ -203,3 +203,4 @@ cleanup_environment
 
 echo ""
 echo "Erfolgreich abgeschlossen."
+

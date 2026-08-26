@@ -1,6 +1,6 @@
-# Analyse des aktuellen Ablaufs (VKS-Kiosk System)
+# Analyse des aktuellen Ablaufs (vks_kiosk System)
 
-Das VKS-Kiosk System nutzt aktuell ein zweistufiges Installationsverfahren (Debian Netinst + Preseed), um ein vollautomatisiertes, stark eingeschränktes Kiosk-System auf einem Zielgerät (Futro) aufzusetzen.
+Das vks_kiosk System nutzt aktuell ein zweistufiges Installationsverfahren (Debian Netinst + Preseed), um ein vollautomatisiertes, stark eingeschränktes Kiosk-System auf einem Zielgerät (Futro) aufzusetzen.
 
 ## Bisheriger Ablauf (Linux/Windows x86_64)
 
@@ -40,3 +40,4 @@ Das Ziel "direkter Boot in die VKS Umgebung oder Installation auf dem Zielgerät
   Dieses ISO kann dann vom Stick gebootet werden. Der Installer ("Install to Disk") wäre dann Calamares oder der Debian-Live-Installer, der das Live-Dateisystem 1:1 auf die Platte kopiert.
 
 Da dies ein massiver Architekturwechsel ist, der das gesamte Projekt auf den Kopf stellt, wurde als Zwischenschritt die Architektur vereinheitlicht (`shared_build.sh`) und das UI stark verbessert. Der nächste strategische Schritt für ein echtes "Live oder Install" wäre der Wechsel auf `live-build` (für x86) bzw. `pi-gen` (für ARM).
+

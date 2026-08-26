@@ -1,4 +1,4 @@
-# VKS-Kiosk Changelog
+# vks_kiosk Changelog
 
 ## [2.0.0] - 2024
 ### Added
@@ -6,7 +6,7 @@
 - **`shared_build.sh`:** Extracted the duplicate logic from Linux and Windows builder scripts into a single, unified backend script. This ensures consistency and easier maintenance.
 - **Modern Terminal UI:** Integrated `whiptail` (with standard Bash read fallbacks) for visually appealing, fast, and secure user menus, particularly during the critical USB selection phase.
 - **Cross-Distribution Support:** Improved dependency resolution logic. Future updates will extend the package manager support beyond `apt` to `dnf` (Fedora) and `zypper` (SUSE).
-- **Explicit Boot Menu Options:** Updated `grub.cfg` to explicitly distinguish between "Install VKS-Kiosk (Automated)" and "Debian Live/Rescue (Manual)".
+- **Explicit Boot Menu Options:** Updated `grub.cfg` to explicitly distinguish between "Install vks_kiosk (Automated)" and "Debian Live/Rescue (Manual)".
 
 ### Changed
 - **Script Refactoring:** Rewrote `Linux/make_install.sh` and `Windows/make_install_wsl.sh` to act as simple wrappers that source `shared_build.sh`. This removes 90% of redundant code.
@@ -16,3 +16,4 @@
 ### Why these changes were made:
 - **Portability:** The user requested that the scripts run on nearly any Linux (Debian, Suse, Fedora, Ubuntu) and Win (WSL). Centralizing logic and providing fallbacks ensures it works universally.
 - **Safety & Clarity:** Flashing drives is dangerous. Clear, undeniable UI prompts (`whiptail`) prevent catastrophic data loss (e.g., wiping the internal drive).
+

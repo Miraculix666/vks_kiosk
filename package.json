@@ -1,7 +1,8 @@
 {
-  "name": "vks-kiosk",
+  "name": "vks_kiosk",
   "version": "1.0.0",
   "description": "Securely locked-down Linux environment exclusively for VKS usage",
   "author": "VKS-Team",
   "license": "MIT"
 }
+
