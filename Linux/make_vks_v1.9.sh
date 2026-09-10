@@ -56,14 +56,37 @@ chmod 644 /etc/apt/sources.list.d/vivaldi.sources
 apt update && apt-cache policy vivaldi-stable && apt install vivaldi-stable -y
 
 
+# Create default Kiosk configuration
+cat <<EOF | tee /etc/vks_kiosk.conf
+# VKS Kiosk Target Configuration
+# Options:
+#   KIOSK_TARGET="vks"       -> Standard Hipos VKS (https://join.hipos-vks.polizei.nrw)
+#   KIOSK_TARGET="element"   -> Element Matrix Client (https://app.element.io)
+#   KIOSK_URL="https://..."  -> Custom Target Web App / Video Room
+KIOSK_TARGET="vks"
+KIOSK_URL="https://join.hipos-vks.polizei.nrw"
+MATRIX_URL="https://app.element.io"
+EOF
+chmod 644 /etc/vks_kiosk.conf
+
 cat <<EOF | tee /home/vksuser/start.sh
 #!/bin/bash
 xset s off &
 xset s noblank &
 xset -dpms &
 sleep 5
+
+# Load Target Config
+KIOSK_URL="https://join.hipos-vks.polizei.nrw"
+if [ -f /etc/vks_kiosk.conf ]; then
+    . /etc/vks_kiosk.conf
+fi
+if [ "\${KIOSK_TARGET:-}" = "element" ] || [ "\${KIOSK_TARGET:-}" = "matrix" ]; then
+    KIOSK_URL="\${MATRIX_URL:-https://app.element.io}"
+fi
+
 rm -Rf /home/vksuser/.config/vivaldi/Default/Sessions/*
-/usr/bin/vivaldi-stable --app=https://join.hipos-vks.polizei.nrw --kiosk --incognito --use-fake-ui-for-media-stream --autoplay-policy=no-user-gesture-required --check-for-update-interval=31536000 --enable-gpu --ignore-gpu-blocklist --gpu-rasterization --enable-oop-rasterization --no-first-run &
+/usr/bin/vivaldi-stable --app="\$KIOSK_URL" --kiosk --incognito --use-fake-ui-for-media-stream --autoplay-policy=no-user-gesture-required --check-for-update-interval=31536000 --enable-gpu --ignore-gpu-blocklist --gpu-rasterization --enable-oop-rasterization --no-first-run &
 sleep 5
 TOKEN=0
 ALL_SINKS="\$(pactl list short sinks 2>/dev/null)"
@@ -83,7 +106,7 @@ if [ -n "\$PID" ]; then
 elif [ -z "\$PID" ]; then
         echo "Kein Vivaldi-Fenster gefunden!"
 	    rm -Rf /home/vksuser/.config/vivaldi/Default/Sessions/*
-	    /usr/bin/vivaldi-stable --app=https://join.hipos-vks.polizei.nrw --kiosk --incognito --use-fake-ui-for-media-stream --autoplay-policy=no-user-gesture-required --check-for-update-interval=31536000 --enable-gpu --ignore-gpu-blocklist --gpu-rasterization --enable-oop-rasterization --no-first-run &
+	    /usr/bin/vivaldi-stable --app="\$KIOSK_URL" --kiosk --incognito --use-fake-ui-for-media-stream --autoplay-policy=no-user-gesture-required --check-for-update-interval=31536000 --enable-gpu --ignore-gpu-blocklist --gpu-rasterization --enable-oop-rasterization --no-first-run &
 	    PID=\$(pgrep -f "vivaldi-stable|vivaldi")
 	    WIN_ID=\$(xdotool search --pid "\$PID" 2>/dev/null | head -n 1)
 	    xdotool windowactivate "\$WIN_ID"
