@@ -1,0 +1,6 @@
+{
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.editor.revealIfOpen": false,
+    "git.openRepositoryInParentFolders": "never"
+}
