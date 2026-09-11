@@ -13,6 +13,8 @@ class TestOverlay(unittest.TestCase):
     def setUp(self):
         overlay.last_mtime = None
         overlay.cached_text = "keine Datei"
+        overlay.label = MagicMock()
+        overlay.root = MagicMock()
 
     @patch('os.path.getmtime')
     def test_read_text_success(self, mock_getmtime):

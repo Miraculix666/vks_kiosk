@@ -1,0 +1,46 @@
+name: VKS-Kiosk CI & Pyinfra Validation
+
+on:
+  push:
+    branches: [ master, main, 'jules/**' ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  lint-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Just & Pyinfra
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinfra
+          sudo apt-get update -qq
+          sudo apt-get install -y just whiptail clamav udisks2 xdotool
+
+      - name: Validate Shell Script Syntax
+        run: |
+          bash -n Linux/make_live_iso.sh
+          bash -n Linux/make_install.sh
+          bash -n Linux/make_vks_v1.9.sh
+          bash -n Linux/data_transfer_station.sh
+          bash -n Windows/make_install_wsl.sh
+          bash -n Raspi/make_vks.sh
+
+      - name: Validate Pyinfra Playbooks & Python Modules
+        run: |
+          python -m py_compile Linux/overlay.py
+          python -m py_compile infra/inventory.py
+          python -m py_compile infra/deploy_kiosk.py
+          python -m py_compile infra/test_vm_hyperv.py
+
+      - name: Run Just Lint Recipe
+        run: |
+          just lint

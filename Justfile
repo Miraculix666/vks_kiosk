@@ -4,15 +4,23 @@
 default:
     @just --list
 
+# Run all unit tests across all platform modules
+test-unit:
+    @echo "Executing unit tests for overlay and kiosk components..."
+    python -m unittest discover -s Linux -p "test_*.py"
+    python -m unittest discover -s Windows -p "test_*.py"
+    python -m unittest discover -s Raspi -p "test_*.py"
+    @echo "  -> Unit Tests PASSED"
+
 # Lint all scripts, pyinfra playbooks, and python files
-lint:
+lint: test-unit
     @echo "Running syntax checks on shell scripts and pyinfra playbooks..."
     bash -n Linux/make_live_iso.sh
     bash -n Linux/make_install.sh
     bash -n Linux/make_vks_v1.9.sh
     bash -n Linux/data_transfer_station.sh
     bash -n Windows/make_install_wsl.sh
-    python3 -m py_compile Linux/overlay.py infra/inventory.py infra/deploy_kiosk.py infra/test_vm_hyperv.py
+    python -m py_compile Linux/overlay.py infra/inventory.py infra/deploy_kiosk.py infra/test_vm_hyperv.py
     @echo "  -> Syntax OK"
 
 # Build the VKS-Kiosk & Data Transfer Station Live ISO

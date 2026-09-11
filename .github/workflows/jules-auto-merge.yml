@@ -1,0 +1,33 @@
+name: Jules Fast-Track Auto-Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - 'jules/**'
+
+jobs:
+  auto-merge-jules:
+    if: github.actor == 'jules[bot]' || contains(github.head_ref, 'jules') || contains(github.ref, 'jules')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Auto-Approve Jules Pull Request
+        if: github.event_name == 'pull_request'
+        uses: juliangruber/approve-pull-request-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fast-Track Merge Jules Pull Request
+        if: github.event_name == 'pull_request'
+        uses: pascalgn/automerge-action@v0.16.0
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: ""
+          MERGE_METHOD: "squash"
