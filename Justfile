@@ -28,10 +28,30 @@ build-iso:
     @echo "Building VKS-Kiosk & Data Transfer Station Live ISO..."
     sudo bash Linux/make_live_iso.sh
 
-# Run fully automated VM testing on HyperVHost2023
-test-vm host="HyperVHost2023.lafp.schul.polizei.local":
-    @echo "Triggering automated Hyper-V VM test on HyperVHost2023 ({{host}})..."
-    pyinfra -y infra/inventory.py infra/test_vm_hyperv.py --limit {{host}}
+# Run automated VM test for a specific kiosk variant
+# Defaults: kiosk_target=vks | login: Kiosk:Kiosk / root:Master
+test-vm host="HyperVHost2023.lafp.schul.polizei.local" target="vks":
+    @echo "Triggering Hyper-V VM test on {{host}} — variant: {{target}}"
+    pyinfra -y infra/inventory.py infra/test_vm_hyperv.py --limit {{host}} --data kiosk_target={{target}}
+
+# Test the VKS kiosk variant (login: Kiosk:Kiosk, root:Master)
+test-vm-vks host="HyperVHost2023.lafp.schul.polizei.local":
+    @echo "Testing VKS kiosk variant..."
+    pyinfra -y infra/inventory.py infra/test_vm_hyperv.py --limit {{host}} --data kiosk_target=vks
+    @echo "  -> VKS VM test complete. See logs/vm_debug_vks.log & logs/debug_suggestions_vks.md"
+
+# Test the Data Transfer Station kiosk variant (login: Kiosk:Kiosk, root:Master)
+test-vm-transfer host="HyperVHost2023.lafp.schul.polizei.local":
+    @echo "Testing Transfer kiosk variant..."
+    pyinfra -y infra/inventory.py infra/test_vm_hyperv.py --limit {{host}} --data kiosk_target=transfer
+    @echo "  -> Transfer VM test complete. See logs/vm_debug_transfer.log & logs/debug_suggestions_transfer.md"
+
+# Run ALL kiosk variant tests sequentially
+test-vm-all host="HyperVHost2023.lafp.schul.polizei.local":
+    @echo "Running ALL kiosk variant tests..."
+    just test-vm-vks host={{host}}
+    just test-vm-transfer host={{host}}
+    @echo "  -> All variant tests complete."
 
 # Rollout Data Transfer Station configuration to target host mx
 deploy-mx host="mx":
