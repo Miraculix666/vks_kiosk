@@ -34,9 +34,19 @@ if ! id "$KIOSK_USER" &>/dev/null; then
     usermod -aG audio,video,plugdev,cdrom "$KIOSK_USER"
 fi
 
-# 3. Default Appliance Configuration File
+# 3. Dynamic Appliance Configuration (Detect variant from cmdline or preconfig)
+DETECTED_TARGET="vks"
+if grep -q "kiosk_variant=transfer" /proc/cmdline 2>/dev/null || grep -q "kiosk_target=transfer" /proc/cmdline 2>/dev/null; then
+    DETECTED_TARGET="transfer"
+elif grep -q "kiosk_variant=vks" /proc/cmdline 2>/dev/null || grep -q "kiosk_target=vks" /proc/cmdline 2>/dev/null; then
+    DETECTED_TARGET="vks"
+elif [ -f "/cdrom/preconfig.conf" ]; then
+    PRE_VAL=$(grep -E "^KIOSK_TARGET=" /cdrom/preconfig.conf | cut -d= -f2 | tr -d '"' || true)
+    if [ -n "$PRE_VAL" ]; then DETECTED_TARGET="$PRE_VAL"; fi
+fi
+
 if [ ! -f "$CONFIG_FILE" ]; then
-    cat << 'EOF_CONF' > "$CONFIG_FILE"
+    cat << EOF_CONF > "$CONFIG_FILE"
 # ==============================================================================
 # Unified VKS Appliance Runtime Configuration
 # ==============================================================================
@@ -44,7 +54,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
 #   "vks"      - Fullscreen Video Conferencing Kiosk (Vivaldi/Chromium)
 #   "transfer" - Secure Sandboxed USB Data Transfer Station (TUI / ClamAV)
 #   "matrix"   - Dual Mode with Desktop Menu Selector
-KIOSK_TARGET="vks"
+KIOSK_TARGET="$DETECTED_TARGET"
 KIOSK_URL="https://vks.bayern.de"
 AUTO_SCAN_USB="true"
 XFCE_HARDEN="true"

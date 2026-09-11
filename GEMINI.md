@@ -1,6 +1,6 @@
 # 🤖 Agent Directives & Repository Matrix (Antigravity & Jules)
 
-Welcome AI Agent (Antigravity, Jules, Claude Code, Gemini CLI, Hermes, OpenJarvis, Kepler).
+Welcome AI Agent (Antigravity, Jules, Claude Code, Gemini CLI, Hermes, OpenJarvis, Kepler, Herdr).
 This file defines the mandatory architecture, repository cross-references, and placement boundaries for `C:\GitHub\`.
 
 ---
@@ -27,7 +27,7 @@ Always refer to [REPOSITORY_MAP.md](file:///C:/GitHub/REPOSITORY_MAP.md) and [ag
 
 4. **Universal Multi-OS, Multi-Client & Multi-Agent/Harness Mandate**:
    * **Multi-OS**: Provide native, symmetric support for both Windows (.ps1) and Linux/POSIX (.sh/Justfile).
-   * **Multi-Client & Multi-Agent/Harness**: Antigravity, Jules, Claude Code, Hermes, Aider, Goose, OpenCode, Continue, CodeGPT, OpenHands, and **Kepler** (ACP-based ADE).
+   * **Multi-Client & Multi-Agent/Harness**: Antigravity, Jules, Claude Code, Hermes, Aider, Goose, OpenCode, Continue, CodeGPT, OpenHands, **Kepler** (ACP-based ADE), and **Herdr** (Agent Workspace Manager).
    * **Architecture**: Universal in base/core templates; specific in host-overrides (llm_stack_config/hosts/{hostname}_config.yaml).
    * **Kepler Config Sync**: python C:/GitHub/llm_stack_config/scripts/sync_agent_harnesses.py
 

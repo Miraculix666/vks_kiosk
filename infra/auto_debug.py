@@ -43,8 +43,8 @@ def _env(key: str, default: str) -> str:
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
-LLM_ENDPOINT   = _env("LLM_ENDPOINT",  "http://localhost:8080")
-LLM_MODEL      = _env("LLM_MODEL",     "qwen2.5-coder-7b-instruct-q4_k_m.gguf")
+LLM_ENDPOINT   = _env("LLM_ENDPOINT",  "http://localhost:8000")
+LLM_MODEL      = _env("LLM_MODEL",     "C:\\AI-Stack\\Models\\Hermes-3-Llama-3.1-8B.Q4_K_M.gguf")
 KIOSK_USER     = _env("VM_KIOSK_USER", "Kiosk")
 ROOT_USER      = _env("VM_ROOT_USER",  "root")
 

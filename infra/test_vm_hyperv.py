@@ -40,8 +40,8 @@ KIOSK_PASSWORD  = _e("VM_KIOSK_PASSWORD", "Kiosk")
 ROOT_USER       = _e("VM_ROOT_USER",      "root")
 ROOT_PASSWORD   = _e("VM_ROOT_PASSWORD",  "Master")
 
-LLM_ENDPOINT    = _e("LLM_ENDPOINT", "http://localhost:8080")
-LLM_MODEL       = _e("LLM_MODEL",    "qwen2.5-coder-7b-instruct-q4_k_m.gguf")
+LLM_ENDPOINT    = _e("LLM_ENDPOINT", "http://localhost:8000")
+LLM_MODEL       = _e("LLM_MODEL",    "C:\\AI-Stack\\Models\\Hermes-3-Llama-3.1-8B.Q4_K_M.gguf")
 
 # ISO selection per variant
 ISO_MAP = {

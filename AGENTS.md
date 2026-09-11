@@ -14,7 +14,7 @@ Part of the **VKS Kiosk & Cisco Video** stack.
    - Bash scripts must use LF line endings. Use python -c or WSL for on-Windows generation.
 
 2. **Multi-Agent & Multi-Harness Ubiquity:**
-   - Universal support for: Antigravity, Jules, Claude Code, Hermes, OpenCode, Aider, Goose, Continue, CodeGPT, OpenHands, **Kepler**.
+   - Universal support for: Antigravity, Jules, Claude Code, Hermes, OpenCode, Aider, Goose, Continue, CodeGPT, OpenHands, **Kepler**, **Herdr**.
    - Per-agent directive files: GEMINI.md (Antigravity), CLAUDE.md (Claude Code), KEPLER.md (Kepler), JULES_EXECUTION_DIRECTIVE.md (Jules).
 
 3. **Universal First, Specific as Needed:**
