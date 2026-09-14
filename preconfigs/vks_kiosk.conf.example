@@ -1,0 +1,16 @@
+# ==============================================================================
+# VKS Kiosk & Data Transfer Station Appliance Configuration Template
+# Place active config file at /etc/vks_kiosk.conf
+# ==============================================================================
+
+# Operating Target Mode:
+# "vks"       - Direct launch of VKS Video Conference Kiosk
+# "transfer"  - Data Transfer Station (USB Virus Scanning & Transfer GUI)
+# "selection" - Interactive Whiptail mode selection dialog on startup
+KIOSK_TARGET="vks"
+
+# Conference Portal URL
+KIOSK_URL="https://vks.bayern.de"
+
+# Automatic USB Malware Scan on Insertion
+AUTO_SCAN_USB="true"

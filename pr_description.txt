@@ -1,6 +1,0 @@
-🧹 [code health improvement description]
-
-🎯 **What:** The `except:` clause in `Windows/overlay.py`, `Linux/overlay.py`, and `Raspi/overlay.py` has been updated to `except Exception:`.
-💡 **Why:** Bare `except:` clauses are bad practice in Python as they catch `SystemExit` and `KeyboardInterrupt` exceptions, potentially making it hard to exit the program. Catching `Exception` avoids catching these system-exiting exceptions, leading to more robust and standard-compliant code.
-✅ **Verification:** Unit tests in `Windows/test_overlay.py` and other equivalent platform directories ensure that the file reading logic gracefully handles missing files or read errors, now specifically catching `Exception` instead of all possible bases. Run the suite to ensure all tests still pass.
-✨ **Result:** A safer code structure that avoids inadvertently masking system-level termination signals or unexpected deep failures, thereby improving maintainability.

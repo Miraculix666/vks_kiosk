@@ -57,3 +57,9 @@ test-vm-all host="HyperVHost2023.lafp.schul.polizei.local":
 deploy-mx host="mx":
     @echo "Deploying Data Transfer Station configuration to target host mx ({{host}})..."
     pyinfra -y infra/inventory.py infra/deploy_kiosk.py --limit {{host}}
+
+# Verify presence of mandatory project metafiles
+docs-audit:
+    @echo "Auditing mandatory system metafiles..."
+    python -c "import os; files=['README.md','CHANGELOG.md','help.md','SOURCES.md','AI_REBUILD_PROMPT.md']; missing=[f for f in files if not os.path.exists(f)]; print('Metafiles OK') if not missing else print('MISSING:', missing)"
+

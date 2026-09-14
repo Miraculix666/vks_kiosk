@@ -224,8 +224,19 @@ case "${KIOSK_TARGET:-vks}" in
         if [ "$CHOICE" = "2" ]; then
             exec xfce4-terminal --fullscreen -T "Data Transfer Station" -e /usr/local/bin/data_transfer_station.sh
         else
-            BROWSER_BIN=$(command -v vivaldi || command -v chromium || command -v firefox)
-            exec "$BROWSER_BIN" --app="${KIOSK_URL:-https://vks.bayern.de}" --kiosk --no-first-run
+            BROWSER_BIN=$(command -v vivaldi || command -v vivaldi-stable || command -v chromium || command -v firefox)
+            exec "$BROWSER_BIN" \
+                --app="${KIOSK_URL:-https://vks.bayern.de}" \
+                --kiosk \
+                --incognito \
+                --use-fake-ui-for-media-stream \
+                --autoplay-policy=no-user-gesture-required \
+                --check-for-update-interval=31536000 \
+                --enable-gpu \
+                --ignore-gpu-blocklist \
+                --gpu-rasterization \
+                --enable-oop-rasterization \
+                --no-first-run
         fi
         ;;
     "vks"|*)
