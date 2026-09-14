@@ -9,7 +9,8 @@
 hypervhost = [
     ("localhost", {
         "ip":                 "127.0.0.1",
-        "ssh_user":           "root",
+        "winrm_user":          "Administrator",
+        "winrm_password":      "Master",
         "role":               "hyperv_test_host",
         # Kiosk variant to test (can be overridden via --data kiosk_target=transfer)
         "kiosk_target":       "vks",
