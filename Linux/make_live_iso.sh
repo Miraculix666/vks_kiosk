@@ -39,15 +39,38 @@ ca-certificates
 pulseaudio
 pavucontrol
 firefox-esr
+plymouth
+plymouth-themes
 EOF_PKG
 
 # Include custom scripts & files in chroot
 mkdir -p config/includes.chroot/usr/local/bin
 mkdir -p config/includes.chroot/home/vksuser/Desktop
 mkdir -p config/includes.chroot/etc
+mkdir -p config/includes.chroot/usr/share/backgrounds/vks
+mkdir -p config/includes.binary/boot/grub/themes/vks-modern
+mkdir -p config/includes.binary/isolinux
 
-cp "$SCRIPT_DIR/data_transfer_station.sh" config/includes.chroot/usr/local/bin/data_transfer_station.sh
-chmod +x config/includes.chroot/usr/local/bin/data_transfer_station.sh
+if [ -f "$SCRIPT_DIR/data_transfer_station.sh" ]; then
+    cp "$SCRIPT_DIR/data_transfer_station.sh" config/includes.chroot/usr/local/bin/data_transfer_station.sh
+    chmod +x config/includes.chroot/usr/local/bin/data_transfer_station.sh
+fi
+
+# Copy GRUB Theme & Wallpaper Assets
+if [ -d "$SCRIPT_DIR/theme" ]; then
+    cp -r "$SCRIPT_DIR/theme/"* config/includes.binary/boot/grub/themes/vks-modern/ 2>/dev/null || true
+    cp "$SCRIPT_DIR/theme/background.png" config/includes.chroot/usr/share/backgrounds/vks/vks-wallpaper.png 2>/dev/null || true
+    cp "$SCRIPT_DIR/theme/splash.png" config/includes.binary/isolinux/splash.png 2>/dev/null || true
+fi
+
+# Copy grub.cfg and preseed.cfg to binary includes
+mkdir -p config/includes.binary/boot/grub
+if [ -f "$SCRIPT_DIR/grub.cfg" ]; then
+    cp "$SCRIPT_DIR/grub.cfg" config/includes.binary/boot/grub/grub.cfg
+fi
+if [ -f "$SCRIPT_DIR/preseed.cfg" ]; then
+    cp "$SCRIPT_DIR/preseed.cfg" config/includes.binary/preseed.cfg
+fi
 
 # Default config in chroot
 cat << 'EOF_CONF' > config/includes.chroot/etc/vks_kiosk.conf
@@ -61,8 +84,8 @@ EOF_CONF
 cat << 'EOF_DESK' > config/includes.chroot/home/vksuser/Desktop/install.desktop
 [Desktop Entry]
 Type=Application
-Name=Install VKS Appliance
-Comment=Launch Calamares Disk Installer to deploy to SSD/eMMC
+Name=VKS Appliance Installer (Calamares)
+Comment=Grafische Installation auf SSD / eMMC starten
 Exec=sudo calamares
 Icon=system-software-install
 Terminal=false
