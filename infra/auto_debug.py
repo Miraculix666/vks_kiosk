@@ -23,6 +23,7 @@ import json
 import pathlib
 import urllib.request
 import urllib.error
+import socket
 
 # ---------------------------------------------------------------------------
 # Load .env (simple parser - no external deps required)
@@ -109,10 +110,10 @@ def main() -> int:
         with urllib.request.urlopen(req, timeout=120) as resp:
             result = json.loads(resp.read().decode("utf-8"))
         suggestion = result["choices"][0]["message"]["content"]
-    except urllib.error.URLError as exc:
-        print(f"[auto_debug] WARN: LLM endpoint unreachable - {exc}")
+    except (urllib.error.URLError, TimeoutError, socket.timeout) as exc:
+        print(f"[auto_debug] WARN: LLM endpoint unreachable or timed out - {exc}")
         suggestion = (
-            "**Local model unreachable** - llama.cpp server did not respond.\n"
+            "**Local model unreachable or timeout** - llama.cpp / Reasonix server did not respond in time.\n"
             "Start it with:\n"
             "```bash\n"
             f"./llama-server -m \"{_env('LLM_MODEL_PATH', 'C:/AI-Stack/Models/qwen2.5-coder-7b-instruct-q4_k_m.gguf')}\" "
