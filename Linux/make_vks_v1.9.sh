@@ -283,4 +283,34 @@ Section "ServerFlags"
 EndSection
 EOF_XORG
 
+# 10. GRUB & Plymouth Theme & Splash Installation
+echo "Installing VKS GRUB Theme, Splash and Wallpaper..."
+mkdir -p /boot/grub/themes/vks-modern
+if [ -d "theme" ]; then
+    cp -r theme/* /boot/grub/themes/vks-modern/ 2>/dev/null || true
+elif [ -d "../theme" ]; then
+    cp -r ../theme/* /boot/grub/themes/vks-modern/ 2>/dev/null || true
+fi
+
+# Set default wallpaper for XFCE desktop
+if [ -f "/boot/grub/themes/vks-modern/background.png" ]; then
+    mkdir -p /usr/share/backgrounds/vks
+    cp /boot/grub/themes/vks-modern/background.png /usr/share/backgrounds/vks/vks-wallpaper.png 2>/dev/null || true
+fi
+
+# Enforce visible GRUB menu, timeout and theme in /etc/default/grub
+if [ -f "/etc/default/grub" ]; then
+    sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=10/' /etc/default/grub
+    sed -i 's/^GRUB_TIMEOUT_STYLE=.*/GRUB_TIMEOUT_STYLE=menu/' /etc/default/grub
+    if ! grep -q "GRUB_THEME=" /etc/default/grub; then
+        echo 'GRUB_THEME="/boot/grub/themes/vks-modern/theme.txt"' >> /etc/default/grub
+    else
+        sed -i 's|^GRUB_THEME=.*|GRUB_THEME="/boot/grub/themes/vks-modern/theme.txt"|' /etc/default/grub
+    fi
+    if ! grep -q "GRUB_GFXMODE=" /etc/default/grub; then
+        echo 'GRUB_GFXMODE="1920x1080,1366x768,1024x768,auto"' >> /etc/default/grub
+    fi
+    update-grub 2>/dev/null || true
+fi
+
 echo "=== VKS Appliance v1.9 Setup & Hardening Complete ==="

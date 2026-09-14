@@ -1,0 +1,229 @@
+# ==============================================================================
+# VKS Kiosk & Secure Data Transfer Appliance - GRUB 2 Theme Specification
+# File: /boot/grub/themes/vks-modern/theme.txt
+# ==============================================================================
+
+# General Theme Attributes
+title-text: ""
+desktop-image: "background.png"
+desktop-color: "#0f172a"
+terminal-font: "Unifont Regular 14"
+terminal-left: "10%"
+terminal-top: "20%"
+terminal-width: "80%"
+terminal-height: "60%"
+
+# ------------------------------------------------------------------------------
+# 1. Header & Appliance Title
+# ------------------------------------------------------------------------------
++ label {
+    top = 35
+    left = 50%-320
+    width = 640
+    height = 28
+    text = "VKS KIOSK & SECURE DATA TRANSFER APPLIANCE"
+    font = "Unifont Bold 14"
+    color = "#38bdf8"
+    align = "center"
+}
+
++ label {
+    top = 65
+    left = 50%-320
+    width = 640
+    height = 20
+    text = "Hardened Enterprise Linux Enclave • Automated Deployment & Runtime"
+    font = "Unifont Regular 12"
+    color = "#94a3b8"
+    align = "center"
+}
+
+# ------------------------------------------------------------------------------
+# 2. Main Boot Menu (Center Canvas)
+# ------------------------------------------------------------------------------
++ boot_menu {
+    left = 50%-360
+    top = 105
+    width = 720
+    height = 280
+    
+    item_font = "Unifont Regular 14"
+    item_color = "#f8fafc"
+    selected_item_font = "Unifont Bold 14"
+    selected_item_color = "#38bdf8"
+    
+    icon_width = 24
+    icon_height = 24
+    item_height = 36
+    item_padding = 5
+    item_spacing = 5
+    
+    scrollbar = true
+    scrollbar_width = 6
+}
+
+# ------------------------------------------------------------------------------
+# 3. Timeout Progress Bar & Auto-Boot Counter
+# ------------------------------------------------------------------------------
++ progress_bar {
+    id = "__timeout__"
+    left = 50%-250
+    top = 400
+    width = 500
+    height = 20
+    text = "Automatischer Start in %d Sekunden..."
+    font = "Unifont Regular 12"
+    text_color = "#f8fafc"
+    align = "center"
+}
+
+# ------------------------------------------------------------------------------
+# 4. On-Screen Instruction & Function Cards (3-Column Bottom Panel)
+# ------------------------------------------------------------------------------
+
+# --- Card 1: Direct System Mode Hotkeys ---
++ canvas {
+    left = 50%-440
+    top = 440
+    width = 280
+    height = 170
+    
+    + label {
+        top = 8
+        left = 12
+        width = 256
+        text = "⚡ QUICK HOTKEYS"
+        font = "Unifont Bold 14"
+        color = "#38bdf8"
+    }
+    + label {
+        top = 32
+        left = 12
+        width = 256
+        text = "[1] Video Kiosk Mode (Full HD)"
+        font = "Unifont Regular 12"
+        color = "#f8fafc"
+    }
+    + label {
+        top = 52
+        left = 12
+        width = 256
+        text = "[2] Data Transfer Station (USB)"
+        font = "Unifont Regular 12"
+        color = "#f8fafc"
+    }
+    + label {
+        top = 72
+        left = 12
+        width = 256
+        text = "[3] Debian Live / Rescue Shell"
+        font = "Unifont Regular 12"
+        color = "#f59e0b"
+    }
+    + label {
+        top = 92
+        left = 12
+        width = 256
+        text = "[4] Plugin- & Profile Menu"
+        font = "Unifont Regular 12"
+        color = "#f8fafc"
+    }
+}
+
+# --- Card 2: Environment & Network Information ---
++ canvas {
+    left = 50%-140
+    top = 440
+    width = 280
+    height = 170
+    
+    + label {
+        top = 8
+        left = 12
+        width = 256
+        text = "🌐 INFRASTRUKTUR"
+        font = "Unifont Bold 14"
+        color = "#38bdf8"
+    }
+    + label {
+        top = 32
+        left = 12
+        width = 256
+        text = "• Netz: DHCP / VLAN 250"
+        font = "Unifont Regular 12"
+        color = "#94a3b8"
+    }
+    + label {
+        top = 52
+        left = 12
+        width = 256
+        text = "• Security: ClamAV / TLS 1.3"
+        font = "Unifont Regular 12"
+        color = "#94a3b8"
+    }
+    + label {
+        top = 72
+        left = 12
+        width = 256
+        text = "• Ziel: Fujitsu Futro / x86_64"
+        font = "Unifont Regular 12"
+        color = "#94a3b8"
+    }
+    + label {
+        top = 92
+        left = 12
+        width = 256
+        text = "• Audio: Cisco DX80 / SIP"
+        font = "Unifont Regular 12"
+        color = "#94a3b8"
+    }
+}
+
+# --- Card 3: Keyboard Controls & Diagnostics ---
++ canvas {
+    left = 50%+160
+    top = 440
+    width = 280
+    height = 170
+    
+    + label {
+        top = 8
+        left = 12
+        width = 256
+        text = "⌨ NAVIGATION"
+        font = "Unifont Bold 14"
+        color = "#38bdf8"
+    }
+    + label {
+        top = 32
+        left = 12
+        width = 256
+        text = "[↑/↓]  Auswahl bewegen"
+        font = "Unifont Regular 12"
+        color = "#f8fafc"
+    }
+    + label {
+        top = 52
+        left = 12
+        width = 256
+        text = "[ENTER] Sofort starten"
+        font = "Unifont Regular 12"
+        color = "#f8fafc"
+    }
+    + label {
+        top = 72
+        left = 12
+        width = 256
+        text = "[e]     Kernel-Parameter"
+        font = "Unifont Regular 12"
+        color = "#94a3b8"
+    }
+    + label {
+        top = 92
+        left = 12
+        width = 256
+        text = "[c]     GRUB-Konsole"
+        font = "Unifont Regular 12"
+        color = "#94a3b8"
+    }
+}
