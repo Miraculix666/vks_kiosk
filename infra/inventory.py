@@ -7,10 +7,9 @@
 #   VM_ROOT_USER=root    VM_ROOT_PASSWORD=Master
 
 hypervhost = [
-    ("localhost", {
-        "ip":                 "127.0.0.1",
-        "winrm_user":          "Administrator",
-        "winrm_password":      "Master",
+    ("HyperVHost2023.lafp.schul.polizei.local", {
+        "ip":                 "192.168.250.15",
+        "ssh_user":           "root",
         "role":               "hyperv_test_host",
         # Kiosk variant to test (can be overridden via --data kiosk_target=transfer)
         "kiosk_target":       "vks",
@@ -21,6 +20,7 @@ hypervhost = [
         "vm_root_password":   "Master",
     })
 ]
+
 
 mx_target = [
     ("mx", {
