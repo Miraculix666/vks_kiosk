@@ -24,11 +24,12 @@ hypervhost = [
 
 mx_target = [
     ("mx", {
-        "ssh_hostname":       "192.168.250.100",
+        "ssh_hostname":       "192.168.250.24",
         "ssh_user":           "root",
         "role":               "data_transfer_kiosk",
         "kiosk_target":       "transfer",
-        # VM login defaults
+        "mac_address":        "E4-46-B0-18-93-78",
+        # VM / Host login defaults
         "vm_kiosk_user":      "Kiosk",
         "vm_kiosk_password":  "Kiosk",
         "vm_root_user":       "root",
